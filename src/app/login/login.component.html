@@ -1,0 +1,60 @@
+<div
+  class="d-flex align-items-center justify-content-center"
+  style="height: 100vh"
+>
+  <div class="card card-dark" style="width: 55%">
+    <div class="card-header">
+      <h3 class="card-title">Login</h3>
+    </div>
+    <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+      <div class="card-body">
+        <p
+          *ngIf="errorMsg"
+          class="alert alert-danger alert-dismissible fade show"
+        >
+          {{ errorMsg }}
+        </p>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="Enter username"
+            formControlName="username"
+          />
+          <div
+            *ngIf="isSubmitted && formControls.username.errors"
+            class="help-block"
+          >
+            <div *ngIf="formControls.username.errors.required" class="text-danger">
+              Username is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <div
+            *ngIf="isSubmitted && formControls.password.errors"
+            class="help-block"
+          >
+            <div *ngIf="formControls.password.errors.required" class="text-danger">
+              Password is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-dark">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
