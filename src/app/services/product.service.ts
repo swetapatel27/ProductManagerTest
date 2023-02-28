@@ -50,7 +50,6 @@ export class ProductService {
   }
 
   updateProduct(newProduct:any){
-    console.log("new Product",newProduct);
     this.products.find((p:any)=>{
       if(p.id == newProduct.id){
         p.name = newProduct.name;

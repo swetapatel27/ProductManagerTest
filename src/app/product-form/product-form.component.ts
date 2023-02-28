@@ -21,29 +21,35 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
 
     this._productServices.getTaxes().subscribe(taxes => this.taxes = taxes);
-    console.log("out param", this.isEdit);
+
     this._activatedRoute.params.subscribe(param => {
       if (param['id'] != undefined) {
+
+        //enable edit if parameter is not undefined.
         this._productServices.getProductById(param['id']).subscribe((product) => {
 
             this.product = product;
             this.isEdit = true;
-            console.log("in param", this.isEdit);
+
             this.productForm = this.fb.group({
               id:[this.product.id,Validators.required],
               name: [this.product.name, Validators.required],
               price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]*$")]],
               taxId: [this.product.taxId, [Validators.required],],
             });
-          }
-        );
+
+          });
+
       }else{
+
+        //form for adding new product
         this.productForm = this.fb.group({
           id:['',],
           name: ['', Validators.required],
           price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
           taxId: ['', [Validators.required],],
         });
+
       }
     });
 
@@ -59,11 +65,11 @@ export class ProductFormComponent implements OnInit {
     this.submitted = true;
     if (this.productForm.valid) {
       alert('Form Submitted succesfully!!!');
-      console.table(this.productForm.value);
+
       if (!this.isEdit) {
         this._productServices.addProduct(this.productForm.value);
       } else {
-        // this.productForm.value['id']=;
+
         this._productServices.updateProduct(this.productForm.value);
         this.isEdit = false;
       }

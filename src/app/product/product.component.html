@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Tax</th>
+            <th>Bill Amount</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -22,6 +23,7 @@
             <td>{{product.name}}</td>
             <td>{{product.price}}</td>
             <td>{{product.taxId | taxnames : taxes}}</td>
+            <td>{{calculate_amount(product.price,product.taxId)}}</td>
             <td>
               <button class="btn btn-outline-danger" (click)="edit(product.id)">Edit</button>
             </td>
